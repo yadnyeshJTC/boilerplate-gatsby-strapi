@@ -1,0 +1,32 @@
+{
+  "name": "jalantechnologies-marketing-website-boilerplate",
+  "private": true,
+  "version": "0.1.0",
+  "description": "A gatsby and strapi based boilerplate for marketing websites",
+  "scripts": {
+    "develop": "strapi develop",
+    "start": "strapi start",
+    "build": "strapi build",
+    "strapi": "strapi"
+  },
+  "devDependencies": {},
+  "dependencies": {
+    "@strapi/plugin-gatsby-preview": "^0.1.0",
+    "@strapi/plugin-graphql": "4.4.5",
+    "@strapi/plugin-i18n": "4.4.5",
+    "@strapi/plugin-users-permissions": "4.4.5",
+    "@strapi/strapi": "4.4.5",
+    "better-sqlite3": "7.4.6"
+  },
+  "author": {
+    "name": "engineering@jalantechnologies.com"
+  },
+  "strapi": {
+    "uuid": "19c6980b-05ca-470d-835c-830f3c6b474f"
+  },
+  "engines": {
+    "node": ">=14.19.1 <=18.x.x",
+    "npm": ">=6.0.0"
+  },
+  "license": "MIT"
+}
