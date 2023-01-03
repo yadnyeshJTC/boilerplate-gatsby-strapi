@@ -1,0 +1,51 @@
+name: preview_on_dispatch
+
+on: workflow_dispatch
+
+concurrency:
+  group: ci-preview-${{ github.event.ref }}
+  cancel-in-progress: true
+
+jobs:
+  preview_backend:
+    uses: jalantechnologies/platform-github/.github/workflows/kube.yml@v2.5
+    with:
+      app_name: boilerplate-website-backend
+      app_env: preview
+      app_hostname: '{1}-backend.preview.platform.jalantechnologies.com'
+      branch: ${{ github.event.ref }}
+      build_context: 'api'
+      build_args: |
+        CI=true
+        NODE_ENV=production
+      deploy_root: 'lib/kube/backend'
+      steps: 'deploy'
+    secrets:
+      docker_registry: docker-registry.platform.jalantechnologies.com/boilerplate-website
+      docker_username: ${{ secrets.DOCKER_USERNAME }}
+      docker_password: ${{ secrets.DOCKER_PASSWORD }}
+      doppler_token: ${{ secrets.DOPPLER_PREVIEW_TOKEN }}
+      do_access_token: ${{ secrets.DO_ACCESS_TOKEN }}
+      do_cluster_id: ${{ secrets.DO_CLUSTER_ID }}
+
+  preview_frontend:
+    uses: jalantechnologies/platform-github/.github/workflows/kube.yml@v2.5
+    needs: 'preview_backend'
+    with:
+      app_name: boilerplate-website-frontend
+      app_env: preview
+      app_hostname: '{1}-website.preview.platform.jalantechnologies.com'
+      branch: ${{ github.event.ref }}
+      build_args: |
+        CI=true
+        NODE_ENV=production
+        STRAPI_API_URL=${{ needs.preview_backend.outputs.deploy_url }}
+        STRAPI_TOKEN=5d0d2b729d10e97c85481e002228274ba2ca565b04cb61483a8726951d241cece2ed67109008209a5ac104ee91e124a2cace899c7d6b10d47077210bd6b1b5b2bca9ab71c14b4fc47dac2eead65b2a912b49acfa8db7ca49887908cbbcedd576d29704956adb6543cc15a5b1f998fdeab7b665ead3772301a49e1c8f71cd1974
+      deploy_root: 'lib/kube/frontend'
+      steps: 'deploy'
+    secrets:
+      docker_registry: docker-registry.platform.jalantechnologies.com/boilerplate-website
+      docker_username: ${{ secrets.DOCKER_USERNAME }}
+      docker_password: ${{ secrets.DOCKER_PASSWORD }}
+      do_access_token: ${{ secrets.DO_ACCESS_TOKEN }}
+      do_cluster_id: ${{ secrets.DO_CLUSTER_ID }}
