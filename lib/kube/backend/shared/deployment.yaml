@@ -40,5 +40,7 @@ spec:
             httpGet:
               path: /
               port: 1337
-            initialDelaySeconds: 8
+            # keep initial delay settings according to time taken by data initializer to complete
+            # if it's too low, continued failures will cause the pod to restart thus killing the init process
+            initialDelaySeconds: 30
             periodSeconds: 3
