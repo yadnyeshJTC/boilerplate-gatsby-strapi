@@ -10,7 +10,7 @@ concurrency:
 
 jobs:
   clean_backend:
-    uses: jalantechnologies/platform-github/.github/workflows/clean.yml@v2.5
+    uses: jalantechnologies/platform-github/.github/workflows/clean.yml@v2.6
     with:
       app_name: boilerplate-website-backend
       app_env: preview
@@ -20,7 +20,7 @@ jobs:
       do_cluster_id: ${{ secrets.DO_CLUSTER_ID }}
 
   clean_frontend:
-    uses: jalantechnologies/platform-github/.github/workflows/clean.yml@v2.5
+    uses: jalantechnologies/platform-github/.github/workflows/clean.yml@v2.6
     with:
       app_name: boilerplate-website-frontend
       app_env: preview

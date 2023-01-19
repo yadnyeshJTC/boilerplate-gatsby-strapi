@@ -11,7 +11,7 @@ concurrency:
 
 jobs:
   production_backend:
-    uses: jalantechnologies/platform-github/.github/workflows/kube.yml@v2.5
+    uses: jalantechnologies/platform-github/.github/workflows/kube.yml@v2.6
     with:
       app_name: boilerplate-website-backend
       app_env: production
@@ -32,7 +32,7 @@ jobs:
       do_cluster_id: ${{ secrets.DO_CLUSTER_ID }}
 
   production_frontend:
-    uses: jalantechnologies/platform-github/.github/workflows/kube.yml@v2.5
+    uses: jalantechnologies/platform-github/.github/workflows/kube.yml@v2.6
     needs: 'production_backend'
     with:
       app_name: boilerplate-website-frontend

@@ -10,15 +10,15 @@ concurrency:
 
 jobs:
   preview_backend:
-    uses: jalantechnologies/platform-github/.github/workflows/kube.yml@v2.5
+    uses: jalantechnologies/platform-github/.github/workflows/kube.yml@v2.6
     # only run when updating an 'Open' PR
     if: github.event.pull_request.state == 'open'
     with:
+      analyze_base: main
       app_name: boilerplate-website-backend
       app_env: preview
       app_hostname: '{1}-backend.preview.platform.jalantechnologies.com'
       branch: ${{ github.event.pull_request.head.ref }}
-      branch_base: ${{ github.event.pull_request.base.ref }}
       build_context: 'api'
       build_args: |
         CI=true
@@ -35,16 +35,16 @@ jobs:
       do_cluster_id: ${{ secrets.DO_CLUSTER_ID }}
 
   preview_frontend:
-    uses: jalantechnologies/platform-github/.github/workflows/kube.yml@v2.5
+    uses: jalantechnologies/platform-github/.github/workflows/kube.yml@v2.6
     needs: 'preview_backend'
     # only run when updating an 'Open' PR
     if: github.event.pull_request.state == 'open'
     with:
+      analyze_base: main
       app_name: boilerplate-website-frontend
       app_env: preview
       app_hostname: '{1}-website.preview.platform.jalantechnologies.com'
       branch: ${{ github.event.pull_request.head.ref }}
-      branch_base: ${{ github.event.pull_request.base.ref }}
       build_args: |
         CI=true
         NODE_ENV=production
