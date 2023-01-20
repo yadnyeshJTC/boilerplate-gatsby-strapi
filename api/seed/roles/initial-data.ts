@@ -81,7 +81,7 @@ let isDataSet: boolean;
 
 const strapiEndpoint = process.env.STRAPI_APP_HOST
   ? `https://${process.env.STRAPI_APP_HOST}`
-  : `http://localhost:${process.env.PORT}`
+  : `http://localhost:${process.env.STRAPI_PORT}`
 
 const getToken = async (count: number) => {
   try {
