@@ -43,7 +43,7 @@ jobs:
         CI=true
         NODE_ENV=production
         STRAPI_API_URL=${{ needs.production_backend.outputs.deploy_url }}
-        STRAPI_TOKEN=295d2f7d5b1d364174fae70581b4d6d1857c18ece0c71bbb4925b8ab113c10f19f9795818301bdc3a7843ad5086659d24ecb6244e97e227652fc278ac7cde2ca7882d7105dbf3b1711ca16ddbae3d9526bead10914ed5a607cb160fe9dc3ee700c8fa1aee95fe075a0594a0d252114c0eb45cf9dd9312c5955fb16935e5ec0bf
+        STRAPI_TOKEN=6ba762f635dfa67649144524f7689098cd3f0729701ea21f912ffd034954f0ee5ed8d9ca7d849a1df95db69eb9429e0e9b357e0ca4d8d9542dc0b983868e939899c4683a622caf2e2cc88804beb234a59cd0dfd1fc06df800e7c0de93a758b6ff8890a326dff1c0895269f4401b2d95cc525db350c06d9a1aec55a444a35a566
       deploy_root: 'lib/kube/frontend'
       steps: 'deploy'
     secrets:
