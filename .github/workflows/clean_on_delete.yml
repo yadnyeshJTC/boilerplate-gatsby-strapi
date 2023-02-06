@@ -8,7 +8,7 @@ concurrency:
 
 jobs:
   clean_backend:
-    uses: jalantechnologies/platform-github/.github/workflows/clean.yml@v2.6
+    uses: jalantechnologies/platform-github/.github/workflows/clean.yml@v2.7
     # only run when deleting a branch
     if: github.event.ref_type == 'branch'
     with:
@@ -16,11 +16,14 @@ jobs:
       app_env: preview
       branch: ${{ github.event.ref }}
     secrets:
+      docker_registry: docker-registry.platform.jalantechnologies.com/boilerplate-website-backend
+      docker_username: ${{ secrets.DOCKER_USERNAME }}
+      docker_password: ${{ secrets.DOCKER_PASSWORD }}
       do_access_token: ${{ secrets.DO_ACCESS_TOKEN }}
       do_cluster_id: ${{ secrets.DO_CLUSTER_ID }}
 
   clean_frontend:
-    uses: jalantechnologies/platform-github/.github/workflows/clean.yml@v2.6
+    uses: jalantechnologies/platform-github/.github/workflows/clean.yml@v2.7
     # only run when deleting a branch
     if: github.event.ref_type == 'branch'
     with:
@@ -28,5 +31,8 @@ jobs:
       app_env: preview
       branch: ${{ github.event.ref }}
     secrets:
+      docker_registry: docker-registry.platform.jalantechnologies.com/boilerplate-website-frontend
+      docker_username: ${{ secrets.DOCKER_USERNAME }}
+      docker_password: ${{ secrets.DOCKER_PASSWORD }}
       do_access_token: ${{ secrets.DO_ACCESS_TOKEN }}
       do_cluster_id: ${{ secrets.DO_CLUSTER_ID }}

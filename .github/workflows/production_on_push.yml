@@ -11,7 +11,7 @@ concurrency:
 
 jobs:
   production_backend:
-    uses: jalantechnologies/platform-github/.github/workflows/kube.yml@v2.6
+    uses: jalantechnologies/platform-github/.github/workflows/kube.yml@v2.7
     with:
       app_name: boilerplate-website-backend
       app_env: production
@@ -24,7 +24,7 @@ jobs:
       deploy_root: 'lib/kube/backend'
       steps: 'deploy'
     secrets:
-      docker_registry: docker-registry.platform.jalantechnologies.com/boilerplate-website
+      docker_registry: docker-registry.platform.jalantechnologies.com/boilerplate-website-backend
       docker_username: ${{ secrets.DOCKER_USERNAME }}
       docker_password: ${{ secrets.DOCKER_PASSWORD }}
       doppler_token: ${{ secrets.DOPPLER_PRODUCTION_TOKEN }}
@@ -32,7 +32,7 @@ jobs:
       do_cluster_id: ${{ secrets.DO_CLUSTER_ID }}
 
   production_frontend:
-    uses: jalantechnologies/platform-github/.github/workflows/kube.yml@v2.6
+    uses: jalantechnologies/platform-github/.github/workflows/kube.yml@v2.7
     needs: 'production_backend'
     with:
       app_name: boilerplate-website-frontend
@@ -43,11 +43,11 @@ jobs:
         CI=true
         NODE_ENV=production
         STRAPI_API_URL=${{ needs.production_backend.outputs.deploy_url }}
-        STRAPI_TOKEN=6ba762f635dfa67649144524f7689098cd3f0729701ea21f912ffd034954f0ee5ed8d9ca7d849a1df95db69eb9429e0e9b357e0ca4d8d9542dc0b983868e939899c4683a622caf2e2cc88804beb234a59cd0dfd1fc06df800e7c0de93a758b6ff8890a326dff1c0895269f4401b2d95cc525db350c06d9a1aec55a444a35a566
+        STRAPI_TOKEN=${{ vars.STRAPI_PRODUCTION_TOKEN }}
       deploy_root: 'lib/kube/frontend'
       steps: 'deploy'
     secrets:
-      docker_registry: docker-registry.platform.jalantechnologies.com/boilerplate-website
+      docker_registry: docker-registry.platform.jalantechnologies.com/boilerplate-website-frontend
       docker_username: ${{ secrets.DOCKER_USERNAME }}
       docker_password: ${{ secrets.DOCKER_PASSWORD }}
       do_access_token: ${{ secrets.DO_ACCESS_TOKEN }}

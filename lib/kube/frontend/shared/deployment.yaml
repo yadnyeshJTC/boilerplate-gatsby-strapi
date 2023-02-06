@@ -29,3 +29,21 @@ spec:
           env:
             - name: NODE_ENV
               value: 'production'
+          startupProbe:
+            httpGet:
+              path: /
+              port: 9000
+            # keeping the threshold settings according to time taken by data initializer to complete
+            # if it's too low, continued failures will cause the pod to restart thus killing the init process
+            failureThreshold: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 9000
+            initialDelaySeconds: 30
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 9000
+            initialDelaySeconds: 60

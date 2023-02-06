@@ -10,21 +10,27 @@ concurrency:
 
 jobs:
   clean_backend:
-    uses: jalantechnologies/platform-github/.github/workflows/clean.yml@v2.6
+    uses: jalantechnologies/platform-github/.github/workflows/clean.yml@v2.7
     with:
       app_name: boilerplate-website-backend
       app_env: preview
       branch: ${{ github.event.pull_request.head.ref }}
     secrets:
+      docker_registry: docker-registry.platform.jalantechnologies.com/boilerplate-website-backend
+      docker_username: ${{ secrets.DOCKER_USERNAME }}
+      docker_password: ${{ secrets.DOCKER_PASSWORD }}
       do_access_token: ${{ secrets.DO_ACCESS_TOKEN }}
       do_cluster_id: ${{ secrets.DO_CLUSTER_ID }}
 
   clean_frontend:
-    uses: jalantechnologies/platform-github/.github/workflows/clean.yml@v2.6
+    uses: jalantechnologies/platform-github/.github/workflows/clean.yml@v2.7
     with:
       app_name: boilerplate-website-frontend
       app_env: preview
       branch: ${{ github.event.pull_request.head.ref }}
     secrets:
+      docker_registry: docker-registry.platform.jalantechnologies.com/boilerplate-website-frontend
+      docker_username: ${{ secrets.DOCKER_USERNAME }}
+      docker_password: ${{ secrets.DOCKER_PASSWORD }}
       do_access_token: ${{ secrets.DO_ACCESS_TOKEN }}
       do_cluster_id: ${{ secrets.DO_CLUSTER_ID }}
