@@ -15,6 +15,7 @@ jobs:
       app_name: boilerplate-website-backend
       app_env: preview
       branch: ${{ github.event.pull_request.head.ref }}
+      deploy_root: 'lib/kube/backend'
     secrets:
       docker_registry: docker-registry.platform.jalantechnologies.com/boilerplate-website-backend
       docker_username: ${{ secrets.DOCKER_USERNAME }}
@@ -28,6 +29,7 @@ jobs:
       app_name: boilerplate-website-frontend
       app_env: preview
       branch: ${{ github.event.pull_request.head.ref }}
+      deploy_root: 'lib/kube/frontend'
     secrets:
       docker_registry: docker-registry.platform.jalantechnologies.com/boilerplate-website-frontend
       docker_username: ${{ secrets.DOCKER_USERNAME }}
