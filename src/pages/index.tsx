@@ -1,6 +1,5 @@
 import * as React from 'react';
 import PageLayout from '../page-layouts';
-import { getMediaUrl } from '../utils/get-media-url';
 import { Homepage } from '../types/homepage';
 import NavBar from '../components/nav-bar/nav-bar';
 import { Hero } from '../components/banner/home-page-banner';
@@ -14,17 +13,10 @@ declare type IndexPageProps = {
 
 const IndexPage: React.FC<IndexPageProps> = ({ serverData }) => {
   const homepage = serverData.homePageData as Homepage;
-
+  console.log(serverData);
   return (
     <PageLayout>
-      <SEO
-        data={homepage.data.attributes.Seo}
-        // title={homepage.data.attributes.Seo.Title}
-        // metaImage={getMediaUrl(
-        //   homepage.data.attributes.Seo.Favicon.data.attributes.url,
-        // )}
-        // description={homepage.data.attributes.Seo.Description}
-      />
+      <SEO data={homepage.data.attributes.Seo} />
       <Block position={'relative'}>
         <NavBar data={homepage.data.attributes.Header} />
         <Hero data={homepage.data.attributes.Banners} />

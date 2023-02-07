@@ -81,7 +81,7 @@ let isDataSet: boolean;
 
 const strapiEndpoint = process.env.STRAPI_APP_HOST
   ? `https://${process.env.STRAPI_APP_HOST}`
-  : `http://localhost:${process.env.STRAPI_PORT}`
+  : `http://${process.env.HOST}:${process.env.PORT}`;
 
 const getToken = async (count: number) => {
   try {
@@ -100,7 +100,7 @@ const getToken = async (count: number) => {
   }
 };
 
-const addPermission = async token => {
+const addPermission = async (token) => {
   try {
     const loginRes = await axios.put(
       `${strapiEndpoint}/users-permissions/roles/2`,
@@ -131,9 +131,9 @@ const singlePermissions = {
   delete: { enabled: false, policy: '' },
 };
 
-export const setInitialRole = async pages => {
+export const setInitialRole = async (pages) => {
   pages.map(
-    page =>
+    (page) =>
       (roles.permissions[`api::${page.name}`] = {
         controllers: {
           [page.name]: page.isCollection
