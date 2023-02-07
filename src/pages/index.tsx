@@ -13,7 +13,7 @@ declare type IndexPageProps = {
 
 const IndexPage: React.FC<IndexPageProps> = ({ serverData }) => {
   const homepage = serverData.homePageData as Homepage;
-  console.log(serverData);
+
   return (
     <PageLayout>
       <SEO data={homepage.data.attributes.Seo} />
